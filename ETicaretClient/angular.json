@@ -30,12 +30,19 @@
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./node_modules/alertifyjs/build/css/alertify.min.css",
+              "./node_modules/alertifyjs/build/css/themes/semantic.min.css",
+              "./node_modules/ngx-toastr/toastr.css",
+              "./node_modules/ngx-spinner/animations/ball-scale-multiple.css",
+              "./node_modules/ngx-spinner/animations/ball-atom.css",
+              "./node_modules/ngx-spinner/animations/ball-elastic-dots.css",
               "src/styles.scss"
 
             ],
             "scripts": [
               "./node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "./node_modules/jquery/dist/jquery.min.js"
+              "./node_modules/jquery/dist/jquery.min.js",
+              "./node_modules/alertifyjs/build/alertify.min.js"
             ]
           },
           "configurations": {
