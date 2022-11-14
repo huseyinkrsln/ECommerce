@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent, Spinnertype } from 'src/app/base/base.component';
 import { Create_Product } from 'src/app/contracts/create_product';
 import { HttpClientService } from 'src/app/services/common/http-client.service';
+import { ListComponent } from './list/list.component';
 
 @Component({
   selector: 'app-products',
@@ -18,9 +19,6 @@ export class ProductsComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.showSpinner(Spinnertype.ballElasticDots);
-
-
     /**********************Bu kısım örnek amaçlı yazılmıştır***************
     Best Practice için Get-te kullanıcak Contract-o-ı oluşturduk ve türünü buraya yazdık Product[] liste old için
      this.httpclientService
@@ -66,8 +64,12 @@ export class ProductsComponent extends BaseComponent implements OnInit {
        })
        .subscribe((x) => console.log(x));
      */
-
-
   }
 
+
+  //html de list ve create child oldkları için @ViewChild ile elde edebiliriz
+  @ViewChild(ListComponent) listComponents : ListComponent
+  createdProduct(createProduct : Create_Product){
+    this.listComponents.getProducts();
+  }
 }
