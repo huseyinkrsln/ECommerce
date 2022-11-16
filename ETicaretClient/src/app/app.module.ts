@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
   declarations: [
     AppComponent,
 
+
   ],
   imports: [
     BrowserModule,
@@ -24,7 +25,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     NgxSpinnerModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     // uyugulama bazında singleton olarak tutulacağından dolayı baseUrl e karşılık value döndürecek

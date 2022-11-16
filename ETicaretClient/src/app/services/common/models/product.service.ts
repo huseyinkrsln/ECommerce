@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Create_Product } from 'src/app/contracts/create_product';
 import { List_Product } from 'src/app/contracts/list_product';
 import { HttpClientService } from '../http-client.service';
-import { firstValueFrom, lastValueFrom } from 'rxjs';
+import { firstValueFrom, lastValueFrom, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -45,55 +45,67 @@ export class ProductService {
 
   //paginationda tüm verileri sayfaya yüklememeliyiz. Ne kadarlık ver istiyorsak ekrana o kadar çıkmalı.
 
-     async read(
-       page: number = 0,
-       size: number = 5,
-       successCallBack?: () => void,
-       errorCallBack?: (errorMessage: string) => void
-     ): Promise<{ totalCount: number; products: List_Product[] }> {
-       const promiseData: Promise<{
-         totalCount: number;
-         products: List_Product[];
-       }> = firstValueFrom(
-         this.httpClientService.get<{
-           totalCount: number;
-           products: List_Product[];
-         }>({
-           controller: 'products',
-           queryString: `page=${page}&size=${size}`,
-         })
-     );
+  async read(
+    page: number = 0,
+    size: number = 5,
+    successCallBack?: () => void,
+    errorCallBack?: (errorMessage: string) => void
+  ): Promise<{ totalCount: number; products: List_Product[] }> {
+    const promiseData: Promise<{
+      totalCount: number;
+      products: List_Product[];
+    }> = firstValueFrom(
+      this.httpClientService.get<{
+        totalCount: number;
+        products: List_Product[];
+      }>({
+        controller: 'products',
+        queryString: `page=${page}&size=${size}`,
+      })
+    );
 
-      //   async read (
-      //     page: number = 0,
-      //     size: number = 5,
-      //     successCallBack?: () => void,
-      //     errorCallBack?: (errorMessage: string) => void
-      //   ): Promise<{ totalCount: number; products: List_Product[] }> {
-      //     let promiseData:{
-      //       totalCount: number;
-      //       products: List_Product[];
-      //     } = null;
-      //    const getFunc  =
-      //       this.httpClientService.get<{
-      //         totalCount: number;
-      //         products: List_Product[];
-      //       }>({
-      //         controller: 'products',
-      //         queryString: `page=${page}&size=${size}`,
-      //       });
-      //  await lastValueFrom<{products:List_Product[],totalCount: number}>(getFunc)
-      //  .then(data => {promiseData=data;successCallBack()})
-      //  .catch((errorResponse: HttpErrorResponse)=>
-      //  errorCallBack(errorResponse.message)
-      //  )
+    //   async read (
+    //     page: number = 0,
+    //     size: number = 5,
+    //     successCallBack?: () => void,
+    //     errorCallBack?: (errorMessage: string) => void
+    //   ): Promise<{ totalCount: number; products: List_Product[] }> {
+    //     let promiseData:{
+    //       totalCount: number;
+    //       products: List_Product[];
+    //     } = null;
+    //    const getFunc  =
+    //       this.httpClientService.get<{
+    //         totalCount: number;
+    //         products: List_Product[];
+    //       }>({
+    //         controller: 'products',
+    //         queryString: `page=${page}&size=${size}`,
+    //       });
+    //  await lastValueFrom<{products:List_Product[],totalCount: number}>(getFunc)
+    //  .then(data => {promiseData=data;successCallBack()})
+    //  .catch((errorResponse: HttpErrorResponse)=>
+    //  errorCallBack(errorResponse.message)
+    //  )
 
-        promiseData
-          .then((d) => successCallBack())
-          .catch((errorResponse: HttpErrorResponse) =>
-            errorCallBack(errorResponse.message)
-          );
+    promiseData
+      .then((d) => successCallBack())
+      .catch((errorResponse: HttpErrorResponse) =>
+        errorCallBack(errorResponse.message)
+      );
 
-     return await  promiseData;
+    return await promiseData;
+  }
+
+  //delete directive için burada server tarafını hazırladık
+  async delete(id: string) {
+    const deleteObservable: Observable<List_Product> =
+      this.httpClientService.delete<List_Product>(
+        {
+          controller: 'products',
+        },
+        id
+      );
+    await firstValueFrom(deleteObservable);
   }
 }

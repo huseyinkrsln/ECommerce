@@ -9,6 +9,7 @@ import {
   MessageType,
   Position,
 } from 'src/app/services/admin/alertify.service';
+import { FileUploadOptions } from 'src/app/services/common/file-upload/file-upload.component';
 import { ProductService } from 'src/app/services/common/models/product.service';
 
 @Component({
@@ -29,6 +30,16 @@ export class CreateComponent extends BaseComponent implements OnInit {
 
   //Ürün oluştuğunda sayfa yenilenmeden tablo güncellenmesi için yani Createden -> Product'a buradan list'e
   @Output() createdProduct : EventEmitter<Create_Product> = new EventEmitter();
+
+  //File upload için çekeceğimiz options'ı burada uyarlıyoruz. output veriyoruz çünkü transfer olacak
+  @Output() fileUploadOptions:Partial<FileUploadOptions> = {
+    action:"upload",
+    controller:"products",
+    explanation:"Resimleri sürükleyin veya seçin..",
+    isAdminPanel:true,
+    //sadece bu dosya formatlarını göstermei için eklendi.upload file html de [accept]="options.accept" olarak ekledi
+    accept:".png,.jpg,.jpeg, .pdf",
+  }
 
   create(
     name: HTMLInputElement,

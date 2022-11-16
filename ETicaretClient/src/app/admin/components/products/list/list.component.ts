@@ -12,6 +12,9 @@ import {
 } from 'src/app/services/admin/alertify.service';
 import { ProductService } from 'src/app/services/common/models/product.service';
 
+//delete işlemi için Jquery talep ettik
+declare var $: any;
+
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -32,34 +35,46 @@ export class ListComponent extends BaseComponent implements OnInit {
     'price',
     'createdDate',
     'updatedDate',
+    'edit',
+    'delete',
   ];
   // null çünkü api den veriler henüz gelmedi
   dataSource: MatTableDataSource<List_Product> = null;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-
-
   async getProducts() {
     this.showSpinner(Spinnertype.ballScaleMultiple);
-    const allProducts: {totalCount:number;products:List_Product[]} = await this.productsService.read(
-      this.paginator ? this.paginator.pageIndex : 0,
-      this.paginator ? this.paginator.pageSize : 5,
-      () => this.hideSpinner(Spinnertype.ballScaleMultiple),
-      (errorMessage) =>
-        this.alertfiyService.message(errorMessage, {
-          dismissOthers: true,
-          messageType: MessageType.Error,
-          position: Position.TopCenter,
-        }));
-    this.dataSource = new MatTableDataSource<List_Product>(allProducts.products);
+    const allProducts: { totalCount: number; products: List_Product[] } =
+      await this.productsService.read(
+        this.paginator ? this.paginator.pageIndex : 0,
+        this.paginator ? this.paginator.pageSize : 5,
+        () => this.hideSpinner(Spinnertype.ballScaleMultiple),
+        (errorMessage) =>
+          this.alertfiyService.message(errorMessage, {
+            dismissOthers: true,
+            messageType: MessageType.Error,
+            position: Position.TopCenter,
+          })
+      );
+    this.dataSource = new MatTableDataSource<List_Product>(
+      allProducts.products
+    );
     this.paginator.length = allProducts.totalCount;
-   // this.dataSource.paginator = this.paginator;
+    // this.dataSource.paginator = this.paginator;
   }
 
- async pageChanged(){
-await this.getProducts();
+  //directive kullanmakdan delete
+  //delete de amaç tıkladığımız satırın parentına ulaşmak yani tr'ye
+  //   delete(id,event ){
+  // const img : HTMLImageElement = event.srcElement;
+  // // tr yi 2 sn de kaldırcak
+  //   }
+  // $(img.parentElement.parentElement).fadeOut(2000);
+
+  async pageChanged() {
+    await this.getProducts();
   }
- async ngOnInit() {
-   await this.getProducts();
- }
+  async ngOnInit() {
+    await this.getProducts();
+  }
 }
