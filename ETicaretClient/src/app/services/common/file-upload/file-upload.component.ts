@@ -29,7 +29,7 @@ import { HttpClientService } from '../http-client.service';
   styleUrls: ['./file-upload.component.scss'],
 })
 //npm ngx-file-upload modülü indirildi
-//App module'e oto declare oldu fakat bunu kaldırmalıyız çünkü dileUpload modulümüz var onadeclare olmalı
+//App module'e oto declare oldu fakat bunu kaldırmalıyız çünkü fileUpload modulümüz var ona declare olmalı
 export class FileUploadComponent {
   constructor(
     private alertifyService: AlertifyService,

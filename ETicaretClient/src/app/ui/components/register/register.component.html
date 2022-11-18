@@ -1,0 +1,106 @@
+<div class="container">
+  <div class="row">
+    <div class="col"></div>
+    <div class="col" id="register">
+       <form class="form group" [formGroup]="frm" (ngSubmit)="onSubmit(frm.value)" >
+
+        <div class="form-floating mb-3">
+          <input
+          [ngClass]="{'is-invalid': submitted && component.nameSurname.errors}"
+          formControlName="nameSurname"
+            type="text"
+            class="form-control"
+            id="nameSurname"
+            placeholder="nameSurname" />
+          <span class="invalid-feedback" *ngIf="submitted && component.nameSurname.errors?.required">Ad Soyad Boş bırakılmaz</span>
+          <span class="invalid-feedback" *ngIf="submitted && (component.nameSurname.errors?.maxlength || component.nameSurname.errors?.minlength )">Ad Soyad 3 ile 50 karakter arasında olmalı</span>
+          <label for="nameSurname">Ad Soyad</label>
+        </div>
+
+        <div class="form-floating mb-3">
+          <input
+          [ngClass]="{'is-invalid': submitted && component.username.errors}"
+          formControlName="username"
+            type="text"
+            class="form-control"
+            id="username"
+            placeholder="username"
+          />
+           <span class="invalid-feedback" *ngIf="submitted && component.username.errors?.required">Kullanıcı Adı boş bırakılmaz</span>
+
+          <label for="username">Kullanıcı Adı</label>
+        </div>
+
+        <div class="form-floating mb-3">
+          <input
+          [ngClass]="{'is-invalid': submitted && component.email.errors}"
+          formControlName="email"
+            type="email"
+            class="form-control"
+            id="email"
+            placeholder="email"
+          />
+        <span class="invalid-feedback" *ngIf="submitted && component.email.errors?.required">Email boş bırakılmaz</span>
+        <span class="invalid-feedback" *ngIf="submitted && component.email.errors?.email">Email formatında giriniz </span>
+
+          <label for="email">Email </label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+          [ngClass]="{'is-invalid': submitted && component.password.errors}"
+          formControlName="password"
+            type="password"
+            class="form-control"
+            id="password"
+            placeholder="Password"
+          />
+           <span class="invalid-feedback" *ngIf="submitted && component.password.errors?.required">Şifre boş bırakılmaz</span>
+
+          <label for="password">Şifre</label>
+        </div>
+        <div class="form-floating">
+          <input
+          [ngClass]="{'is-invalid': submitted && component.passwordConfirm.errors}"
+          formControlName="passwordConfirm"
+            type="password"
+            class="form-control"
+            id="passwordConfirm"
+            placeholder="passwordConfirm"
+          />
+           <!-- <span class="invalid-feedback" *ngIf="submitted && component.passwordConfirm.errors?.required">Şifre Tekrar boş bırakılmaz</span> -->
+           <span class="invalid-feedback"  *ngIf="submitted && frm.hasError('notSame')">Lütfen şifreyi doğrulayın</span>
+
+          <label for="passwordConfirm">Şifre Tekrar</label>
+        </div>
+        <button class="btn btn-secondary mt-3" type="submit">Kayıt Ol</button>
+      </form>
+
+
+      <!-- ANGULAR MATERIAL KULLANIMI -->
+      <!-- <form class="example-form" [formGroup]="frm">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Ad Soyad</mat-label>
+          <input matInput placeholder="" formControlName="adSoyad" />
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Kullanıcı Adı</mat-label>
+          <input matInput placeholder="" formControlName="kullaniciAdi" />
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="" formControlName="email" />
+        </mat-form-field>
+         <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Şifre</mat-label>
+          <input matInput placeholder="" formControlName="password" />
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Şifre Tekrar</mat-label>
+          <input matInput placeholder="" formControlName="passwordConfirm" />
+        </mat-form-field>
+      </form>
+ -->
+    </div>
+    <div class="col"></div>
+  </div>
+</div>

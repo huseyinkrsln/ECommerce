@@ -14,7 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
   imports: [
     CommonModule,
     MatDialogModule,
-    //MatButtonModule
+    MatButtonModule
   ],
 })
 export class DialogModule { }

@@ -1,5 +1,7 @@
-﻿using ETicaretAPI.Application.Services;
+﻿using ETicaretAPI.Application.Abstractions.Tokens;
+using ETicaretAPI.Application.Services;
 using ETicaretAPI.Infrastructure.Services;
+using ETicaretAPI.Infrastructure.Services.Tokens;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ETicaretAPI.Infrastructure
@@ -9,6 +11,7 @@ namespace ETicaretAPI.Infrastructure
         public static void AddInfrastructureServices(this IServiceCollection serviceCollection)
         {
             serviceCollection.AddScoped<IFileService, FileService>();
+            serviceCollection.AddScoped<ITokenHandler,TokenHandler>();
         }
     }
 }

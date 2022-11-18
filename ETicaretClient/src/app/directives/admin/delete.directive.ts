@@ -63,7 +63,7 @@ export class DeleteDirective {
   @Output() callback: EventEmitter<any> = new EventEmitter();
   //td'ye tıklanıldığında (öyle düşünrüsek) silme olacağı için
   //HostListenerda click ' i tetiklediğimiz için tıklanıldığında işlem yapacak
-  @HostListener('click')
+  @HostListener("click")
   async onclick() {
     //yes ise işlem yapacak
     this.dialogService.openDialog({
@@ -85,7 +85,7 @@ export class DeleteDirective {
               this.id
             )
             .subscribe(
-              (data) => {
+              () => {
                 $(td.parentElement).animate(
                   {
                     opacity: 0,

@@ -99,8 +99,8 @@ export class ProductService {
 
   //delete directive için burada server tarafını hazırladık
   async delete(id: string) {
-    const deleteObservable: Observable<List_Product> =
-      this.httpClientService.delete<List_Product>(
+    const deleteObservable: Observable<any> =
+      this.httpClientService.delete<any>(
         {
           controller: 'products',
         },

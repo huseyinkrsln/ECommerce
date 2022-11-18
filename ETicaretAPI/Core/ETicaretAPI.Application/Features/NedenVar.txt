@@ -1,0 +1,1 @@
+﻿Bu klasörün oluşturulma sebebi CQRS ile ilgili tüm command ve queryleri sergilemek
